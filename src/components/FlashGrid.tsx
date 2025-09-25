@@ -2,46 +2,15 @@
 import Image from "next/image";
 import Link from "next/link";
 import Reveal from "../components/RevealAnimation";
+import items from "@/data/flash.json";
 
 type Item = {
   src: string;
   alt: string;
-  // hauteur visuelle par tuile (différente pour chacune)
-  sizeClass: string; // ex: "h-64 md:h-80"
+  title?: string;
+  description?: string;
+  height: number; // px
 };
-
-const items: Item[] = [
-  {
-    src: "/images/Tatoo-1.png",
-    alt: "Tatouage fine line",
-    sizeClass: "h-50 sm:h-50 md:h-50",
-  },
-  {
-    src: "/images/Tatoo-2.png",
-    alt: "Tatouage géométrique",
-    sizeClass: "h-48 sm:h-60 md:h-120",
-  },
-  {
-    src: "/images/Tatoo-1.png",
-    alt: "Tatouage floral",
-    sizeClass: "h-80 sm:h-96 md:h-[28rem]",
-  },
-  {
-    src: "/images/Tatoo-2.png",
-    alt: "Tatouage old school",
-    sizeClass: "h-56 sm:h-64 md:h-82",
-  },
-  {
-    src: "/images/Tatoo-1.png",
-    alt: "Tatouage minimaliste",
-    sizeClass: "h-72 sm:h-80 md:h-96",
-  },
-  {
-    src: "/images/Tatoo-2.png",
-    alt: "Tatouage ligne continue",
-    sizeClass: "h-60 sm:h-60 md:h-64",
-  },
-];
 
 export default function FlashGrid() {
   return (
@@ -56,29 +25,37 @@ export default function FlashGrid() {
           </Link>
         </div>
 
-        {/* Grille responsive. Chaque tuile a une hauteur différente via sizeClass */}
-        <div className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:gap-4">
-          {items.map((it, i) => (
+        {/* Masonry : 2 colonnes sur mobile, 3 dès sm ; gap horizontal ≈ 2px */}
+        <div className="mt-8 columns-2 sm:columns-3 [column-gap:2px]">
+          {(items as Item[]).map((it, i) => (
             <Reveal
               key={it.src}
-              from={i % 3 === 0 ? "left" : "bottom"}
-              delay={i * 0.03}
+              from={i % 2 === 0 ? "left" : "bottom"}
+              delay={i * 0.05}
             >
-              {/* Tuile en flux normal, hauteur différente par item */}
-              <div
-                className={`relative overflow-hidden rounded-xl ${it.sizeClass}`}
+              {/* Tuile : hauteur précise en px ; gap vertical ≈ 2px ; empêche la casse entre colonnes */}
+              <figure
+                className="relative mb-[2px] break-inside-avoid overflow-hidden rounded-xl"
+                style={{ height: `${it.height}px` }}
               >
                 <Image
                   src={it.src}
                   alt={it.alt}
-                  // on remplit la tuile, sans sortir du flux (pas de height inline)
                   fill
                   sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 33vw"
                   className="object-cover"
                   priority={i < 3}
                 />
-                <div className="pointer-events-none absolute inset-0 bg-black/0 transition-colors duration-300 group-hover:bg-black/10" />
-              </div>
+                {/* Légendes facultatives : masquées par défaut */}
+                {false && (it.title || it.description) && (
+                  <figcaption className="absolute bottom-0 left-0 right-0 bg-black/40 text-white px-3 py-2 text-sm">
+                    <span className="font-medium">{it.title}</span>
+                    {it.description ? (
+                      <span className="opacity-80"> — {it.description}</span>
+                    ) : null}
+                  </figcaption>
+                )}
+              </figure>
             </Reveal>
           ))}
         </div>

@@ -1,0 +1,44 @@
+[
+  {
+    "src": "/images/Tatoo-1.png",
+    "alt": "Tatouage fine line",
+    "title": "Fine line papillon",
+    "description": "Ligne fine et rayons",
+    "height": 246
+  },
+  {
+    "src": "/images/Tatoo-2.png",
+    "alt": "Tatouage géométrique",
+    "title": "Géométrique",
+    "description": "",
+    "height": 312
+  },
+  {
+    "src": "/images/Tatoo-1.png",
+    "alt": "Tatouage floral",
+    "title": "Floral",
+    "description": "Bouquet fin",
+    "height": 425
+  },
+  {
+    "src": "/images/Tatoo-2.png",
+    "alt": "Tatouage old school",
+    "title": "Old school",
+    "description": "",
+    "height": 278
+  },
+  {
+    "src": "/images/Tatoo-1.png",
+    "alt": "Tatouage minimaliste",
+    "title": "Minimaliste",
+    "description": "",
+    "height": 361
+  },
+  {
+    "src": "/images/Tatoo-2.png",
+    "alt": "Tatouage ligne continue",
+    "title": "One line",
+    "description": "",
+    "height": 298
+  }
+]
