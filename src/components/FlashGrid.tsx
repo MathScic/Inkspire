@@ -35,7 +35,7 @@ export default function FlashGrid() {
             >
               {/* Tuile : hauteur précise en px ; gap vertical ≈ 2px ; empêche la casse entre colonnes */}
               <figure
-                className="relative mb-[2px] break-inside-avoid overflow-hidden rounded-xl"
+                className="relative mb-[2px] break-inside-avoid overflow-hidden "
                 style={{ height: `${it.height}px` }}
               >
                 <Image
