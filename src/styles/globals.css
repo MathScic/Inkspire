@@ -1,0 +1,41 @@
+/* Tailwind v4 */
+@import "tailwindcss";
+
+/* Thème Inkspire */
+@theme {
+  /* Couleurs principales */
+  --color-ink-black: #0d0d0d; /* fond sombre / header / texte inversé */
+  --color-ink-gold: #c49b63; /* accent / CTA */
+  --color-ink-gray: #737373; /* texte secondaire */
+  --color-ink-light: #f5f5f4; /* fond clair / sections */
+
+  /* Échelle neutre utile */
+  --color-zinc-900: #0b0b0b;
+  --color-zinc-800: #1a1a1a;
+  --color-zinc-700: #2a2a2a;
+  --color-zinc-200: #e5e5e5;
+
+  /* Rayons */
+  --radius-xl: 0.75rem;
+  --radius-2xl: 1rem;
+
+  /* Fonts (variables injectées par next/font) */
+  --font-body: ui-sans-serif, system-ui, -apple-system, "Segoe UI", Inter,
+    sans-serif;
+  --font-heading: "Playfair Display", serif;
+  /* .font-heading {
+    font-family: var(--font-heading);
+  }
+  .font-body {
+    font-family: var(--font-body);
+  } */
+}
+
+/* Base app */
+html,
+body {
+  height: 100%;
+  font-family: var(--font-body);
+  background: var(--color-ink-light);
+  color: var(--color-ink-black);
+}
