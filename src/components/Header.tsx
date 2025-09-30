@@ -4,23 +4,32 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, X } from "lucide-react";
+import { usePathname } from "next/navigation";
 
 export default function Header() {
   const [open, setOpen] = useState(false);
   const [overHero, setOverHero] = useState(true); // vrai = sur la bannière
+  const pathname = usePathname();
+  const isHome = pathname === "/";
 
   useEffect(() => {
+    if (!isHome) return; // pas de gestion du scroll si ce n'est pas la Home
+
     const onScroll = () => {
       const threshold = Math.max(window.innerHeight * 0.75, 300); // ~fin du hero
       setOverHero(window.scrollY < threshold);
     };
+
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
     return () => window.removeEventListener("scroll", onScroll);
-  }, []);
+  }, [isHome]);
 
-  const barClass = overHero
-    ? "bg-transparent"
+  // Définir la classe du header
+  const barClass = isHome
+    ? overHero
+      ? "bg-transparent"
+      : "bg-black/75 backdrop-blur supports-[backdrop-filter]:bg-black/60"
     : "bg-black/75 backdrop-blur supports-[backdrop-filter]:bg-black/60";
 
   return (
