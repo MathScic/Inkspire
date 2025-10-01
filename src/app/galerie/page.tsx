@@ -5,11 +5,7 @@ import GalleryMasonry from "@/components/GalleryMasonry";
 import Reveal from "@/components/RevealAnimation";
 import { useMemo, useState } from "react";
 import data from "../../data/gallery.json";
-import { CATS, type Cat } from "@/lib/categories";
-// … le reste ne change pas
-
-const CATS = ["tous", "flash", "grosse pièces", "autre"] as const;
-type Cat = (typeof CATS)[number];
+import { CATS, type Cat } from "@/lib/categories"; // ← source unique
 
 type Pic = {
   src: string;
@@ -42,11 +38,7 @@ export default function GaleriePage() {
 
         <Reveal from="bottom">
           <div className="mt-6">
-            <GalleryFilter
-              value={cat}
-              onChange={setCat} // ✅ plus besoin de `as any`
-              items={CATS}
-            />
+            <GalleryFilter value={cat} onChange={setCat} items={CATS} />
             <GalleryMasonry pics={filtered} />
           </div>
         </Reveal>
