@@ -65,10 +65,9 @@ export async function POST(req: Request) {
 
     return NextResponse.json({ ok: true }, { status: 201 });
   } catch (err: unknown) {
-    // Pas de any ici : on discrimine proprement
     let message = "Unexpected error";
     if (err instanceof ZodError) {
-      message = err.errors.map((e) => e.message).join(", ");
+      message = err.issues.map((i) => i.message).join(", ");
     } else if (err instanceof Error) {
       message = err.message;
     }
