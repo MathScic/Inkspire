@@ -3,36 +3,42 @@
     "src": "/images/Tatoo-1.png",
     "alt": "Fine line",
     "category": "flash",
+    "width": 300,
     "height": 246
   },
   {
     "src": "/images/Tatoo-2.png",
     "alt": "Géométrique",
-    "category": "grosse",
+    "category": "grosse pièces",
+    "width": 300,
     "height": 312
   },
   {
     "src": "/images/Tatoo-3.jpg",
     "alt": "Floral",
     "category": "flash",
+    "width": 300,
     "height": 425
   },
   {
     "src": "/images/Tatoo-4.jpg",
     "alt": "Old school",
     "category": "grosse pièces",
+    "width": 300,
     "height": 278
   },
   {
     "src": "/images/Tatoo-5.jpg",
     "alt": "Minimaliste",
     "category": "grosse pièces",
+    "width": 300,
     "height": 361
   },
   {
     "src": "/images/Tatoo-6.jpg",
     "alt": "One line",
     "category": "flash",
+    "width": 300,
     "height": 298
   }
 ]
