@@ -5,11 +5,22 @@ import GalleryMasonry from "@/components/GalleryMasonry";
 import Reveal from "@/components/RevealAnimation";
 import { useMemo, useState } from "react";
 import data from "../../data/gallery.json";
+import { CATS, type Cat } from "@/lib/categories";
+// … le reste ne change pas
 
 const CATS = ["tous", "flash", "grosse pièces", "autre"] as const;
+type Cat = (typeof CATS)[number];
+
+type Pic = {
+  src: string;
+  alt: string;
+  category: Cat;
+  w?: number;
+  h?: number;
+};
 
 export default function GaleriePage() {
-  const [cat, setCat] = useState<(typeof CATS)[number]>("tous");
+  const [cat, setCat] = useState<Cat>("tous");
   const pics = data as Pic[];
 
   const filtered = useMemo(
@@ -25,7 +36,7 @@ export default function GaleriePage() {
             Galerie
           </h1>
           <p className="mt-2 text-gray-600">
-            Parcourez mes dernières réalisation
+            Parcourez mes dernières réalisations
           </p>
         </Reveal>
 
@@ -33,8 +44,8 @@ export default function GaleriePage() {
           <div className="mt-6">
             <GalleryFilter
               value={cat}
-              onChange={(v) => setCat(v as any)}
-              items={[...CATS]}
+              onChange={setCat} // ✅ plus besoin de `as any`
+              items={CATS}
             />
             <GalleryMasonry pics={filtered} />
           </div>

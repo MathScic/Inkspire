@@ -1,6 +1,6 @@
 import { NextResponse } from "next/server";
 import { Resend } from "resend";
-import { z } from "zod";
+import { z, ZodError } from "zod";
 
 const resend = new Resend(process.env.RESEND_API_KEY);
 
@@ -11,17 +11,37 @@ const Schema = z.object({
   project: z.enum(["Flash", "Grosse pièce", "Autre"]),
   date: z.string().optional().nullable(),
   message: z.string().max(2000).optional().nullable(),
-  website: z.string().optional().nullable(), // 👈 honeypot
+  website: z.string().optional().nullable(), // honeypot
 });
+
+type BookingInput = z.infer<typeof Schema>;
 
 export async function POST(req: Request) {
   try {
-    const body = await req.json();
-    const d = Schema.parse(body);
+    const body = (await req.json()) as unknown;
 
-    // 👇 HONEYPOT : si rempli => bot
+    // Validation stricte (sans any)
+    const parsed = Schema.safeParse(body);
+    if (!parsed.success) {
+      // Retour clair pour les erreurs de validation
+      return NextResponse.json(
+        {
+          ok: false,
+          error: "Validation error",
+          issues: parsed.error.issues.map((i) => ({
+            path: i.path.join("."),
+            message: i.message,
+          })),
+        },
+        { status: 400 }
+      );
+    }
+
+    const d: BookingInput = parsed.data;
+
+    // HONEYPOT : si rempli => bot
     if (d.website && d.website.trim() !== "") {
-      return NextResponse.json({ ok: false }, { status: 204 }); // no content, on “avale” le bot
+      return NextResponse.json({ ok: false }, { status: 204 }); // no content
     }
 
     const text = [
@@ -44,10 +64,14 @@ export async function POST(req: Request) {
     });
 
     return NextResponse.json({ ok: true }, { status: 201 });
-  } catch (e: any) {
-    return NextResponse.json(
-      { ok: false, error: e?.message || "Invalid" },
-      { status: 400 }
-    );
+  } catch (err: unknown) {
+    // Pas de any ici : on discrimine proprement
+    let message = "Unexpected error";
+    if (err instanceof ZodError) {
+      message = err.errors.map((e) => e.message).join(", ");
+    } else if (err instanceof Error) {
+      message = err.message;
+    }
+    return NextResponse.json({ ok: false, error: message }, { status: 400 });
   }
 }

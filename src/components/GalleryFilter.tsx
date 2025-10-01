@@ -1,12 +1,16 @@
 "use client";
+import { CATS, type Cat } from "@/lib/categories";
 
-type Props = { value: string; onChange: (v: string) => void; items?: string[] };
-const DEFAULT = ["tous", "flash", "grosse", "autre"];
+type Props = {
+  value: Cat;
+  onChange: (v: Cat) => void;
+  items?: readonly Cat[];
+};
 
 export default function GalleryFilter({
   value,
   onChange,
-  items = DEFAULT,
+  items = CATS,
 }: Props) {
   return (
     <div className="flex flex-wrap gap-2">
