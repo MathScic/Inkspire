@@ -13,8 +13,13 @@ export default function StudioPage() {
           <h1 className="text-3xl md:text-4xl font-heading font-bold text-ink-black">
             Le studio
           </h1>
+          <p>
+            Bienvenue dans l&apos;univers Inkspire : l&apos;atelier met
+            l&apos;accent sur l&apos;hygiène, le style et l&apos;accompagnement.
+          </p>
+
           <p className="mt-2 text-gray-600">
-            Un espace pensé pour le confort, l'hygiène et la créativité
+            Un espace pensé pour le confort, l&apos;hygiène et la créativité
           </p>
         </Reveal>
 

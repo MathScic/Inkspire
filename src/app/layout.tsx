@@ -3,7 +3,7 @@ import "../styles/globals.css";
 import Header from "../components/Header";
 import Footer from "@/components/Footer";
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Inkspire — L’art du tatouage moderne",
   description: "Studio de tatouage contemporain mêlant art et précision.",
   icons: {
@@ -14,13 +14,19 @@ export const metadata = {
   openGraph: {
     title: "Inkspire — L’art du tatouage moderne",
     description: "Studio de tatouage contemporain mêlant art et précision.",
-    url: "https://ton-domaine.fr", // ← remplace
+    // url: "https://ton-domaine.fr", // ← remplace par ton domaine
     siteName: "Inkspire",
-    images: [{ url: "/images/Inkspire-logo-white", width: 1200, height: 630 }], // ajoute /public/og-cover.jpg
+    images: [
+      {
+        url: "/images/Inkspire-logo-white.png", // ← mets un vrai fichier existant dans /public/images
+        width: 1200,
+        height: 630,
+      },
+    ],
     locale: "fr_FR",
     type: "website",
   },
-} as const;
+};
 
 export default function RootLayout({
   children,
@@ -29,7 +35,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="fr">
-      <body className="">
+      <body>
         <Header />
         {children}
         <Footer />

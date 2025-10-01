@@ -12,7 +12,7 @@ export default function CallToAction() {
             Prêt à réserver votre projet ?
           </h2>
           <p className="mt-3 text-lg text-black/80">
-            Contactez-moi dès aujourd'hui et donnons vie à vos idées.
+            Contactez-moi dès aujourd&apos;hui et donnons vie à vos idées.
           </p>
           <div className="mt-6">
             <Link

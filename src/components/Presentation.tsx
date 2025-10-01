@@ -22,7 +22,7 @@ export default function Presentation() {
         {/* Text */}
         <Reveal from="right" className="w-full md:w-1/2">
           <h2 className="font-heading text-3xl md:text-4xl font-bold">
-            L'ésprit Inkspire
+            L&apos;ésprit Inkspire
           </h2>
           <p className="mt-3 text-base leading-relaxed text-ink-black/80">
             Chez Inkspire, chaque tatouage est pensé comme une œuvre unique.
