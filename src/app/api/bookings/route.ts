@@ -58,7 +58,7 @@ export async function POST(req: Request) {
     await resend.emails.send({
       from: process.env.FROM_EMAIL!,
       to: process.env.BOOKING_TO_EMAIL!,
-      reply_to: d.email,
+      replyTo: d.email, // ✅ remplace reply_to par replyTo
       subject: `Nouvelle demande de RDV — ${d.project}`,
       text,
     });
