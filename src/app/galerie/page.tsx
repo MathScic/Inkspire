@@ -1,23 +1,15 @@
 "use client";
 
 import GalleryFilter from "@/components/GalleryFilter";
-import GalleryMasonry from "@/components/GalleryMasonry";
+import GalleryMasonry, { type Pic } from "@/components/GalleryMasonry";
 import Reveal from "@/components/RevealAnimation";
 import { useMemo, useState } from "react";
 import data from "../../data/gallery.json";
-import { CATS, type Cat } from "@/lib/categories"; // ← source unique
-
-type Pic = {
-  src: string;
-  alt: string;
-  category: Cat;
-  w?: number;
-  h?: number;
-};
+import { CATS, type Cat } from "@/lib/categories";
 
 export default function GaleriePage() {
   const [cat, setCat] = useState<Cat>("tous");
-  const pics = data as Pic[];
+  const pics = data as Pic[]; // ✅ typage strict
 
   const filtered = useMemo(
     () => (cat === "tous" ? pics : pics.filter((p) => p.category === cat)),

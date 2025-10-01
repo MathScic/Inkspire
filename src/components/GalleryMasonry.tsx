@@ -3,11 +3,13 @@ import Image from "next/image";
 import { useState } from "react";
 import Lightbox from "./Lightbox";
 
+// src/components/GalleryMasonry.tsx
 export type Pic = {
   src: string;
   alt: string;
+  category: "tous" | "flash" | "grosse pièces" | "autre";
+  width: number;
   height: number;
-  category: string;
 };
 
 export default function GalleryMasonry({ pics }: { pics: Pic[] }) {
